@@ -28,20 +28,12 @@ make sure `C:/vcpkg` is in your system `PATH`.
 
 ---
 
-### 3. install libraries
+### 3. installing libraries
 
-for example:
+for src/foo.cpp example:
 
 ```bash
 C:/vcpkg/vcpkg install fmt:x64-windows
-C:/vcpkg/vcpkg install asio:x64-windows
-C:/vcpkg/vcpkg install crow:x64-windows
-```
-
-check installed libraries:
-
-```bash
-C:/vcpkg/vcpkg list
 ```
 
 ---
@@ -102,15 +94,48 @@ ${CMAKE_CURRENT_SOURCE_DIR}/resources
 
 ---
 
-### 9. cleaning / rebuilding
+### 9. if you fucked up 
+
+* delete build artifacts and rebuild:
 
 ```bash
 rm -r build
+rm -r out  # if exists
 cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
 cmake --build build --config Release
 ```
 
+* common issues:
+
+  * executable closes immediately: add `std::cin.get();` at the end of `main()` to see output
+  * fmt warnings: safe to ignore, come from the library; can be suppressed with `#pragma warning` if desired
+  * source/header files not compiled: verify `src/*.cpp` are matched by `CMakeLists.txt` `file(GLOB_RECURSE)`
+
+
+
 ---
 
-this template is intended as a starting point for new c++ projects with minimal setup overhead.
-simply clone, add libraries, and start coding.
+### .gitignore for this structure so edit if ya need to
+
+```
+# build artifacts
+build/
+out/
+*.exe
+*.obj
+*.pdb
+*.suo
+
+# IDE config
+.vscode/
+.vs/
+
+# cmake cache
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+# keep include/ tracked even if empty
+include/.gitkeep
+```
