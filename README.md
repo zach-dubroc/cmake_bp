@@ -1,8 +1,8 @@
 ### 1. clone the template
 
 ```bash
-git clone https://github.com/yourusername/cpp-project-template.git my-new-project
-cd my-new-project
+git clone https://github.com/zach-dubroc/cmake_bp.git
+cd cmake_bp
 ```
 
 clean git history:
