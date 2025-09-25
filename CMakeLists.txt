@@ -31,3 +31,10 @@ target_compile_definitions(main1 PUBLIC RESOURCES_PATH="${CMAKE_CURRENT_SOURCE_D
 target_include_directories(main1 PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(main1 PRIVATE profilerLib)
 
+
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(main PRIVATE fmt::fmt)
+
+# Or use the header-only version
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(main1 PRIVATE fmt::fmt-header-only)
